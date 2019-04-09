@@ -1,0 +1,36 @@
+<section class="row">
+  <article class="column column-67">
+    <h2>Messages</h2>
+    <%= if @user == nil do %>
+      <%= form_for @changeset, Routes.page_path(@conn, :define_user), fn f -> %>
+        <div>User : 
+          <%= text_input f, :text %>
+          <%= submit "Submit" %>
+        </div>
+      <% end %>
+    <% else %>
+      <input id="userName" type="hidden" value="<%= @user %>" />
+        <div> Connected as <%= @user %>
+          <%= link "Delete", to: Routes.page_path(@conn, :disconnect_user), method: :delete, class: "btn btn-danger btn-xs" %>
+        </div>
+
+    <% end %>
+    <div>
+      <ul id="chatMessages">
+        <li style="list-style-type:none">
+          welcome to chat
+        </li>
+      </ul>
+
+		</div>
+    <div>
+      <textarea id="myTextArea" col=100></textarea>
+      <button onClick="sendMessage()">Send</button>
+		</div>
+  </article>
+  <article class="column">
+    <h2>User Connected</h2>
+		<ul id="usersList">
+		</ul>
+  </article>
+</section>
